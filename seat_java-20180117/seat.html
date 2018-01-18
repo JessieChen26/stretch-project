@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset='UTF-8' />
+	<title>座位分配</title>
+	<link href='./css/style.css' rel='stylesheet' />
+</head>
+<body>
+	<div class="container">
+		<div class="header">
+			<h2 class="title">分座位智能小程序</h2>
+		</div>
+		<div class="content">
+			<button type="submit" value="Submit" onclick="assignSeats()">Assign</button>
+			<button type="submit" value="Submit">Export</button>
+		</div>
+		<div class="body f-cb">
+			<div class="build-container">
+				<div class="build" id="build">
+					<script id="buildTemplate" type="text/template">
+						{{ for(var floorIndex in it) { }} 
+						{{	var floor = it[floorIndex];}} 
+						<div class="floor f-cb">
+							{{ for(var regionIndex in floor.regions) { }} 
+							{{ var region = floor.regions[regionIndex]; }} 
+							<div class="region" id="region{{= region.id}}" capacity="{{= region.capacity}}">
+								<div class="tag">{{= "F" + region.floor + "_" + region.name + " [" + region.capacity + "]" }}</div>
+								{{ for(var teamIndex in region.teams) { }} 
+								{{ var team = region.teams[teamIndex]; }} 
+								<div class="team" id="team{{= team.id}}">
+									<h4>{{= team.name }}</h4>
+									<p><label>{{= team.headcount }}</label></p>
+								</div>
+								{{ } }}
+							</div>
+							{{ } }}
+						</div>
+						{{ } }}
+					</script>>
+				</div>
+			</div>
+			<div class="underground-container">
+				<div class="underground" id="underground">
+					<script id="undergroundTemplate" type="text/template">
+						{{ for(var teamIndex in it) { }} 
+						{{ var team = it[teamIndex]; }} 
+						{{ if(team.assignIn) continue; }} 
+						<div class="team" id="team{{= team.id}}">
+							<h4>{{= team.name }}</h4>
+							<p><label>{{= team.headcount }}</label></p>
+						</div>
+						{{ } }}
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src='./js/jquery-3.2.1.min.js'></script>
+	<script src='./js/doT.min.js'></script>
+	<script src='./js/drag.js'></script>
+	<script src='./js/index.js'></script>
+</body>
+</html>
