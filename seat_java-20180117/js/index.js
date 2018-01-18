@@ -6,7 +6,7 @@ var regionMapping = {}
 var teams;
 var teamMapping = {}
 getRegions({}, function(data){
-	regions = data
+	regions = data;
 	sort(regions, 'floor', -1);
 	var floors = []
 	var f = 0;
@@ -130,4 +130,8 @@ function assignSeats() {
 		}
 		drag.teamSeatsMap = data.data;
 	});
+}
+
+function refreshPage() {
+	window.location.reload();
 }
