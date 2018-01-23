@@ -105,7 +105,7 @@ function autoAssign(teamAssignData, callback){
     		callback && callback(data)
 	  	},
 	  	error: function(error){
-	  		alert(error)
+	  		alert("Auto Assign Failed!");
 	  	}
 	 });
 }
@@ -134,4 +134,37 @@ function assignSeats() {
 
 function refreshPage() {
 	window.location.reload();
+}
+
+function saveReport() {
+	this.refreshPage();
+	return false;
+}
+
+function importFile() {
+	var self = this;
+	$.ajax({ 
+		url: "http://sz-g46l6h2:8080/assign/importByExcel",
+		type:'post',
+		cache: false,
+		//data: new FormData(document.getElementById("import")),
+		data: new FormData($("#import")[0]),
+		processData: false,
+    	contentType: false,
+		success: function(data) {
+
+			if (data.status === "ERROR") {
+				alert(data.message);
+				return;
+			}
+			self.refreshPage();
+	  	},
+	  	error: function(error){
+	  		console.log(error.message);
+	  	}
+	 });
+}
+
+function DownloadFile() {
+	window.location.href="http://sz-g46l6h2:8080/assign/downloadDataTemplate";
 }

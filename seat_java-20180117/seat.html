@@ -13,7 +13,15 @@
 		<div class="content">
 			<button type="submit" value="Submit" onclick="assignSeats()">Assign</button>
 			<button type="submit" value="Submit" onclick="refreshPage()">Refresh</button>
-			<button type="submit" value="Submit" onclick="refreshPage()">Export</button>
+			<form name=formen id="import" enctype="multipart/form-data">
+				<input type="file" name="file" id="picpath" style="display:none" onChange="document.formen.path.value=this.value">
+				<input name="path" readonly>
+				<input type="button" value="Browse" onclick="document.formen.picpath.click()">
+				<input type="button" value="Import" onclick="importFile()"/>
+			</form>
+			<input type="button" onclick="DownloadFile()" value="click here download data template" />
+			<!--<button type="submit" value="Download" onclick="DownloadFile()">DownLoad</button>-->
+			<!--<form class = "import" action="http://sz-g46l6h2:8080/assign/importByExcel" method="post" enctype="multipart/form-data" onsubmit="return saveReport();"><input type="file" name="file"><input type="submit" value="Import" /></form>-->
 		</div>
 		<div class="body f-cb">
 			<div class="build-container">
